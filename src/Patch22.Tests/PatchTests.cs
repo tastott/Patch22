@@ -13,8 +13,12 @@ namespace Patch22
             var thing = new ImmutableThing(4);
             var patch = Patch.Of<ImmutableThing>()
                 .Set(x => x.MyReadOnlyInt, 2);
+            var expected = new ImmutableThing(2);
+
             var patched = patch.Apply(thing);
-            patched.ShouldBeEquivalentTo(new ImmutableThing(2));
+
+            patched.ShouldBeEquivalentTo(expected);
+            thing.MyReadOnlyInt.Should().Be(4); // Original is unchanged
         }
 
         private class ImmutableThing : ICloneable

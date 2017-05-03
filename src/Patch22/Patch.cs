@@ -9,19 +9,31 @@ namespace Patch22
 {
     public class PatchOf<T>
     {
-        internal PatchOf()
-        {
+        private readonly Func<T, T> cloneFunc;
+        private readonly Dictionary<string, object> changes;
 
+        internal PatchOf(Func<T, T> cloneFunc)
+        {
+            this.cloneFunc = cloneFunc;
+            this.changes = new Dictionary<string, object>();
         }
 
         public PatchOf<T> Set<TProp>(Expression<Func<T, TProp>> memberExpression, TProp value)
         {
+            var memberName = (memberExpression.Body as MemberExpression).Member.Name;
+            this.changes[memberName] = value;
             return this;
         }
 
         public T Apply(T source)
         {
-            return source;
+            var clone = this.cloneFunc(source);
+            foreach (var change in this.changes)
+            {
+                typeof(T).GetField(change.Key).SetValue(clone, change.Value);
+            }
+
+            return clone;
         }
     }
 
@@ -30,7 +42,7 @@ namespace Patch22
         public static PatchOf<T> Of<T>()
             where T : class, ICloneable
         {
-            return new PatchOf<T>();
+            return new PatchOf<T>(instance => instance.Clone() as T);
         }
     }
 }
