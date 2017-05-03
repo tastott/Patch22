@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patch22", "Patch22\Patch22.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patch22.Tests", "Patch22.Tests\Patch22.Tests.csproj", "{FEEB2599-9C7A-43C3-8795-283A44DB8438}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patch22.Performance", "Patch22.Performance\Patch22.Performance.csproj", "{5AD0FB2E-E23F-45C8-9664-DDF90A23BAD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FEEB2599-9C7A-43C3-8795-283A44DB8438}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEEB2599-9C7A-43C3-8795-283A44DB8438}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEEB2599-9C7A-43C3-8795-283A44DB8438}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AD0FB2E-E23F-45C8-9664-DDF90A23BAD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AD0FB2E-E23F-45C8-9664-DDF90A23BAD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AD0FB2E-E23F-45C8-9664-DDF90A23BAD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AD0FB2E-E23F-45C8-9664-DDF90A23BAD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
