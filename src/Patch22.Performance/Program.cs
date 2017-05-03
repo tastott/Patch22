@@ -13,7 +13,8 @@ namespace Patch22.Performance
         {
             var patchFactories = new IPatchFactory[]
             {
-                new SetValuePatchFactory()
+                new SetValuePatchFactory(),
+                new FastMemberPatchFactory()
             };
 
             foreach (var factory in patchFactories)
