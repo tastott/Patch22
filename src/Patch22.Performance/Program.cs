@@ -11,20 +11,31 @@ namespace Patch22.Performance
     {
         static void Main(string[] args)
         {
-            var thing = new SmallImmutableThing(1, "blah");
-            var patch = Patch.Of<SmallImmutableThing>()
-                .Set(x => x.MyInt, 2)
-                .Set(x => x.MyString, "foo");
-
-            GetDurationOf(() => patch.Apply(thing), 1000000, "PatchOf.Apply() on small object");
-
-            var mutableThing = new SmallMutableThing();
-            Action mutateThing = () =>
+            var patchFactories = new IPatchFactory[]
             {
-                mutableThing.MyInt = 2;
-                mutableThing.MyString = "foo";
+                new SetValuePatchFactory()
             };
-            GetDurationOf(mutateThing, 1000000, "Direct mutation of small object");
+
+            foreach (var factory in patchFactories)
+            {
+                var thing = new SmallImmutableThing(1, "blah");
+                var patch = factory.Create<SmallImmutableThing>()
+                    .Set(x => x.MyInt, 2)
+                    .Set(x => x.MyString, "foo");
+
+
+                GetDurationOf(() => patch.Apply(thing), 1000000, $"{patch.GetType().Name} on small object");
+            }
+
+
+
+            //var mutableThing = new SmallMutableThing();
+            //Action mutateThing = () =>
+            //{
+            //    mutableThing.MyInt = 2;
+            //    mutableThing.MyString = "foo";
+            //};
+            //GetDurationOf(mutateThing, 1000000, "Direct mutation of small object");
 
             Console.ReadLine();
         }
