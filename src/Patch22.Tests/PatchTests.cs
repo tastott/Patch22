@@ -10,10 +10,11 @@ namespace Patch22
         [TestMethod]
         public void ReadOnlyField()
         {
-            var thing = new ImmutableThing(4);
-            var patch = new SetValuePatchFactory().Create<ImmutableThing>()
-                .Set(x => x.MyReadOnlyInt, 2);
-            var expected = new ImmutableThing(2);
+            var thing = new ImmutableThing(4, "blah");
+            var patch = new ConstructorPatchFactory().Create<ImmutableThing>()
+                .Set(x => x.MyReadOnlyInt, 2)
+                .Set(x => x.MyReadOnlyString, "foo");
+            var expected = new ImmutableThing(2, "foo");
 
             var patched = patch.Apply(thing);
 
@@ -24,15 +25,17 @@ namespace Patch22
         private class ImmutableThing : ICloneable
         {
             public readonly int MyReadOnlyInt;
+            public readonly string MyReadOnlyString;
 
-            public ImmutableThing(int myReadOnlyInt)
+            public ImmutableThing(int myReadOnlyInt, string myReadOnlyString)
             {
                 this.MyReadOnlyInt = myReadOnlyInt;
+                this.MyReadOnlyString = myReadOnlyString;
             }
 
             public object Clone()
             {
-                return new ImmutableThing(this.MyReadOnlyInt);
+                return new ImmutableThing(this.MyReadOnlyInt, this.MyReadOnlyString);
             }
         }
     }
