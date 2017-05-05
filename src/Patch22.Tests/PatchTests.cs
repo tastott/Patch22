@@ -11,7 +11,7 @@ namespace Patch22
         public void ReadOnlyField()
         {
             var thing = new ImmutableThing(4, "blah");
-            var patch = new ConstructorPatchFactory().Create<ImmutableThing>()
+            var patch = new ConstructorCompilePatchFactory().Create<ImmutableThing>()
                 .Set(x => x.MyReadOnlyInt, 2)
                 .Set(x => x.MyReadOnlyString, "foo");
             var expected = new ImmutableThing(2, "foo");

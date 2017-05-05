@@ -44,12 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConstructorPatch.cs" />
+    <Compile Include="ConstructorCompilePatch.cs" />
+    <Compile Include="ConstructorInvokePatch.cs" />
     <Compile Include="FastMemberPatch.cs" />
     <Compile Include="IPatchOf.cs" />
     <Compile Include="IPatchFactory.cs" />
     <Compile Include="PatchOfBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReflectionUtilities.cs" />
     <Compile Include="SetValuePatch.cs" />
   </ItemGroup>
   <ItemGroup>
